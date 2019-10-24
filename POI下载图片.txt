@@ -1,0 +1,51 @@
+/**
+                     * 将面部照片放入Excel中
+                     * */
+                    try {
+                        //更正图片获取路径 2019/10/14 by huang
+                        String path = "D:\\1.jp";
+                        path = path.replaceAll("\\\\","/");
+
+                        SmbFile sf = new SmbFile(path);
+                        if(true){
+                           /* InputStream in = sf.getInputStream();
+                            //BufferedImage bimg = ImageIO.read(in);
+                            ByteArrayOutputStream out = new ByteArrayOutputStream();
+                            byte buffer[] = new byte[4096];
+                            for (int n = 0;(n = in.read(buffer))>0;){
+                                out.write(buffer,0,n);
+                            }*/
+                            Image src=ImageIO.read(new File("D:/1.jpg"));
+                            BufferedImage bimg = CommonFunction.toBufferedImage(src);
+                            //单元格图片处理对象
+                            XSSFDrawing patriarch;
+                            //单元格图片锚点
+                            XSSFClientAnchor barcodeAnchor;
+                            //一维码图片字节流
+                            org.apache.commons.io.output.ByteArrayOutputStream barcodeByteArray;
+
+                            //POI图片操作对象
+                            patriarch = sheet.createDrawingPatriarch();
+
+                            //初始化图片锚点
+                            barcodeAnchor = new XSSFClientAnchor(0, 10, 6, 17, (short)3, 9, (short)8, 12);
+                            //图片锚点样式
+                            barcodeAnchor.setAnchorType(HSSFClientAnchor.DONT_MOVE_AND_RESIZE);
+
+                            //初始化图片字节流
+                            barcodeByteArray = new ByteArrayOutputStream();
+                            //图片对象写入字节流
+                            ImageUtil.encodeAndWrite(bimg, ImageUtil.JPEG, barcodeByteArray, 96, 96);
+                            barcodeByteArray.close();
+                            //添加图片字节流到Excel
+                            patriarch.createPicture(barcodeAnchor, wb.addPicture(barcodeByteArray.toByteArray(), XSSFWorkbook.PICTURE_TYPE_JPEG));
+                        }else{
+                            row = sheet.getRow(5);// 行 从5开始
+                            cell = row.getCell(0);// 列 从0开始
+                            cell.setCellValue(getText("sys.label.00026"));
+                        }
+                    }catch (Exception e) {
+                        row = sheet.getRow(5);// 行 从5开始
+                        cell = row.getCell(0);// 列 从0开始
+                        cell.setCellValue(getText("sys.label.00026"));
+                    }
