@@ -1,0 +1,272 @@
+Java中String类的常用方法
+1，String类的介绍
+String类在java.lang包中，java使用String类创建一个字符串变量，字符串变量属于对象。
+
+String类是所有语言最常用的一个类，用于描述字符串事物。
+
+String类在Java中被设计成final的，类不能被继承和修改。
+
+常用的String，经常会与StringBuffer 、 StringBuilder进行对比，关于这三个的对比的介绍，可以查看我的博客：String、StringBuffer和StringBuilder的区别和原理
+
+String字符串的创建：
+
+// 声明一个变量名为str的字符串
+String str;
+
+// 声明并初始化
+String str = "abcde";
+1
+2
+3
+4
+5
+2，String类的常用方法
+1，int length()
+获取字符串的长度
+
+String str = "hello world!";
+// 获取str的长度
+System.out.println(str.length());
+运行结果：
+	12
+1
+2
+3
+4
+5
+2，char charAt()
+截取一个字符
+
+String str = "hello world!";
+// 截取下标为1的字符
+System.out.println(str.charAt(1));
+
+运行结果：
+	e
+1
+2
+3
+4
+5
+6
+3，char[] toCharArray()
+将字符串变成一个字符数组
+
+String str = "hello world!";
+char[] chars = str.toCharArray();
+for (char c : chars) {
+    System.out.print(c+"\t");
+}
+
+运行结果：
+	h	e	l	l	o	 	w	o	r	l	d	!	
+1
+2
+3
+4
+5
+6
+7
+8
+4，int indexOf(“字符”)
+查找一个指定的字符串是否存在，返回的是字符串的位置，如果不存在，则返回-1
+
+String str = "hello world!";
+int index = str.indexOf("wo");
+System.out.println(index);
+
+运行结果：
+	6
+1
+2
+3
+4
+5
+6
+5，toUpperCase()
+将字符串里面的小写字母变成大写字母
+
+String str = "hello world!";
+String str2 = str.toUpperCase();
+System.out.println(str2);
+
+运行结果：
+	HELLO WORLD!
+1
+2
+3
+4
+5
+6
+6，toLowerCase()
+将字符串里面的大写字母变成小写字母
+
+String str = "HELLO WORLD!";
+String str2 = str.toUpperCase();
+System.out.println(str2);
+
+运行结果：
+	hello world!
+1
+2
+3
+4
+5
+6
+7，String[] split(“字符”)
+根据给定的正则表达式的匹配来拆分此字符串。形成一个新的String数组。
+
+String str = "hello,world,你,好";
+String[] strs = str.split(",");
+for (String s : strs) {
+    System.out.println(s);
+}
+运行结果：
+	hello
+    world
+    你
+    好
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+8，String trim()
+去掉字符串左右空格
+
+String str = "  hello,world,你,好  ";
+String trim = str.trim();
+System.out.println(trim);
+
+运行结果：
+	hello,world,你,好
+1
+2
+3
+4
+5
+6
+9，String replace(char oldChar,char newChar)
+新字符替换旧字符
+
+String str = "hello,world,你,好";
+String replace = str.replace(",","-");
+System.out.println(replace);
+
+运行结果：
+	hello-world-你-好
+1
+2
+3
+4
+5
+6
+10，String substring(int beginIndex,int endIndex)
+截取字符串，包括beginIndex位置的，不包括endIndex位置的
+
+String str = "hello,world,你,好";
+// 截取0-4位置的字符串，包括0，不包括4
+String substring = str.substring(0, 4);
+System.out.println(substring);
+
+运行结果：
+	hell
+1
+2
+3
+4
+5
+6
+7
+11，boolean equalsIgnoreCase(String str2)
+忽略大小写的比较两个字符串的值是否一模一样，返回一个布尔值
+
+bolean equals(String str2) 比较两个字符串的值是否一模一样
+
+String str = "hello world!";
+String str2 = "HELLO WORLD!";
+System.out.println(str.equalsIgnoreCase(str2));
+System.out.println(str.equals(str2));
+
+运行结果：
+	true
+	false
+1
+2
+3
+4
+5
+6
+7
+8
+12，boolean contains(String str2)
+判断一个字符串里面是否包含指定的内容，返回一个布尔值
+
+String str = "hello world!";
+System.out.println(str.contains("hel"));
+
+运行结果：
+	true
+1
+2
+3
+4
+5
+13，boolean startsWith(String str)
+测试此字符串是否以指定的前缀开始。返回一个布尔值
+
+String str = "hello world!";
+System.out.println(str.startsWith("he"));
+
+运行结果：
+	true
+1
+2
+3
+4
+5
+14，boolean endsWith(String str)
+测试此字符串是否以指定的后缀结束。返回一个布尔值
+
+String str = "hello world!";
+System.out.println(str.endsWith("!"));
+
+运行结果：
+	true
+1
+2
+3
+4
+5
+15， String replaceAll(String str1,Stringstr2)
+将某个内容全部替换成指定内容
+
+String str = "hello world!";
+String replaceAll = str.replaceAll("l", "m");
+System.out.println(replaceAll);
+
+运行结果：
+	hemmo wormd!
+1
+2
+3
+4
+5
+6
+16，String replaceFirst(String str1,String str2)
+将第一次出现的某个内容替换成指定的内容
+
+String str = "hello world!";
+String replaceAll = str.replaceFirst("l", "m");
+System.out.println(replaceAll);
+
+运行结果：
+	hemlo world!
+————————————————
+版权声明：本文为CSDN博主「偏偏爱吃梨」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_45124488/article/details/102781232
